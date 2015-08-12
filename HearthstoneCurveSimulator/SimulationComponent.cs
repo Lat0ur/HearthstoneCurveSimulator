@@ -190,6 +190,8 @@ namespace HearthstoneCurveSimulator
 
                 var mana = ++turns > 10 ? 10 : turns;
 
+                hand.Add(2);
+
                 while (hand.Any(s => s <= mana))
                 {
                     var playableCards = hand.Where(s => s <= mana).ToArray();
@@ -200,6 +202,8 @@ namespace HearthstoneCurveSimulator
                     mana -= tmpValue;
                     dmg += tmpValue;
                 }
+
+                hand.Remove(2);
 
                 tmpResult.Add(turns, dmg);
 
