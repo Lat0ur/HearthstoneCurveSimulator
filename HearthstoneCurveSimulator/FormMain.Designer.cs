@@ -45,7 +45,7 @@
             this.menuStripMain.Location = new System.Drawing.Point(0, 0);
             this.menuStripMain.Name = "menuStripMain";
             this.menuStripMain.Padding = new System.Windows.Forms.Padding(9, 3, 0, 3);
-            this.menuStripMain.Size = new System.Drawing.Size(938, 24);
+            this.menuStripMain.Size = new System.Drawing.Size(1123, 24);
             this.menuStripMain.TabIndex = 0;
             this.menuStripMain.Text = "menuStrip1";
             // 
@@ -54,10 +54,10 @@
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.progressBar,
             this.toolStripStatusLabel1});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 395);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 522);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Padding = new System.Windows.Forms.Padding(2, 0, 21, 0);
-            this.statusStrip1.Size = new System.Drawing.Size(938, 43);
+            this.statusStrip1.Size = new System.Drawing.Size(1123, 43);
             this.statusStrip1.TabIndex = 1;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -79,7 +79,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.resultGraphControl1.Location = new System.Drawing.Point(545, 29);
             this.resultGraphControl1.Name = "resultGraphControl1";
-            this.resultGraphControl1.Size = new System.Drawing.Size(381, 361);
+            this.resultGraphControl1.Size = new System.Drawing.Size(566, 488);
             this.resultGraphControl1.TabIndex = 4;
             // 
             // curveControl1
@@ -90,7 +90,7 @@
             this.curveControl1.Location = new System.Drawing.Point(13, 29);
             this.curveControl1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.curveControl1.Name = "curveControl1";
-            this.curveControl1.Size = new System.Drawing.Size(525, 361);
+            this.curveControl1.Size = new System.Drawing.Size(525, 488);
             this.curveControl1.TabIndex = 3;
             this.curveControl1.DeckChanged += new System.EventHandler<HearthstoneCurveSimulator.CurveControl.DeckChangedEvent>(this.curveControl1_DeckChanged);
             // 
@@ -99,14 +99,15 @@
             this.simulationComponent.Deck = null;
             this.simulationComponent.Iterations = 500;
             this.simulationComponent.ShuffleVeracity = 300;
-            this.simulationComponent.UseBigCardsFirst = false;
+            this.simulationComponent.UseBigCardsFirst = true;
+            this.simulationComponent.ProgressChanged += new System.EventHandler<System.ComponentModel.ProgressChangedEventArgs>(this.simulationComponent_ProgressChanged_1);
             this.simulationComponent.SimulationCompleted += new System.EventHandler<HearthstoneCurveSimulator.SimulationComponent.SimulationDoneEvent>(this.simulationComponent_SimulationCompleted);
             // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(938, 438);
+            this.ClientSize = new System.Drawing.Size(1123, 565);
             this.Controls.Add(this.resultGraphControl1);
             this.Controls.Add(this.curveControl1);
             this.Controls.Add(this.statusStrip1);
@@ -115,6 +116,7 @@
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "FormMain";
             this.Text = "Hearthstone Mana Curve Simulator";
+            this.Load += new System.EventHandler(this.FormMain_Load);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);

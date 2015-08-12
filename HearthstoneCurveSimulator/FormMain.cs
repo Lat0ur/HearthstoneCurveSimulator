@@ -38,7 +38,12 @@ namespace HearthstoneCurveSimulator
             resultGraphControl1.GraphResults(e.Results);
         }
 
-        private void simulationComponent_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        private void simulationComponent_ProgressChanged_1(object sender, ProgressChangedEventArgs e)
+        {
+            progressBar.Value = e.ProgressPercentage;
+        }
+
+        private void FormMain_Load(object sender, EventArgs e)
         {
 
         }

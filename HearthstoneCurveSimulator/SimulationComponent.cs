@@ -48,7 +48,7 @@ namespace HearthstoneCurveSimulator
             {
                 tmpSimResults.Add(i, Simulate(e.Argument as List<int>));
 
-                OnProgressChanged(GetPercentComplete(i));
+                simulationWorker.ReportProgress(GetPercentComplete(i));
             }
 
             e.Result = AggregateResults(tmpSimResults);
@@ -84,9 +84,9 @@ namespace HearthstoneCurveSimulator
         /// </summary>
         /// <param name="current">The current iteration</param>
         /// <returns>a progress changed event arg</returns>
-        private ProgressChangedEventArgs GetPercentComplete(int current)
+        private int GetPercentComplete(int current)
         {
-            return new ProgressChangedEventArgs((int)((1.0 * current / Iterations * 1.0) * 100.0), null);
+            return (int)((1.0 * current / Iterations * 1.0) * 100.0);
         }
 
         /// <summary>

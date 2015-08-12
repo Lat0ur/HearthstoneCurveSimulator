@@ -32,6 +32,7 @@
             // 
             // simulationWorker
             // 
+            this.simulationWorker.WorkerReportsProgress = true;
             this.simulationWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.simulationWorker_DoWork);
             this.simulationWorker.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.simulationWorker_ProgressChanged);
             this.simulationWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.simulationWorker_RunWorkerCompleted);
