@@ -47,5 +47,12 @@ namespace HearthstoneCurveSimulator
         {
 
         }
+
+        private void toolStripButtonHero_CheckedChanged(object sender, EventArgs e)
+        {
+            simulationComponent.UseHeroPower = toolStripButtonHero.Checked;
+
+            simulationComponent.Run(simulationComponent.Deck);
+        }
     }
 }

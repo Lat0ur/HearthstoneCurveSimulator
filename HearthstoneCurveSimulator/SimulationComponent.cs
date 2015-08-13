@@ -16,6 +16,13 @@ namespace HearthstoneCurveSimulator
         [Description("Set card usage order")]
         public bool UseBigCardsFirst { get; set; }
 
+        [Description("Use hero power")]
+        public bool UseHeroPower
+        {
+            get { return _useHeroPower; }
+            set { _useHeroPower = value; }
+        }
+
         /// <summary>
         /// Creates a new <see cref="SimulationComponent"/>
         /// </summary>
@@ -124,6 +131,8 @@ namespace HearthstoneCurveSimulator
         /// </summary>
         private int _shuffleVeracity = 300;
 
+        private bool _useHeroPower;
+
         /// <summary>
         /// The amount of shuffles to perform.
         /// </summary>
@@ -156,7 +165,7 @@ namespace HearthstoneCurveSimulator
         {
             var tmpResult = new Dictionary<int, int>();
 
-            var deck = new List<int>(aDeck);
+            var deck = new List<int>(Deck = aDeck);
             var hand = new List<int>();
 
             if (deck.Count <= 5)
@@ -190,7 +199,10 @@ namespace HearthstoneCurveSimulator
 
                 var mana = ++turns > 10 ? 10 : turns;
 
-                hand.Add(2);
+                if (UseHeroPower)
+                {
+                    hand.Add(2);
+                }
 
                 while (hand.Any(s => s <= mana))
                 {
@@ -203,7 +215,10 @@ namespace HearthstoneCurveSimulator
                     dmg += tmpValue;
                 }
 
-                hand.Remove(2);
+                if (UseHeroPower)
+                {
+                    hand.Remove(2);
+                }
 
                 tmpResult.Add(turns, dmg);
 

@@ -28,10 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Title title2 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Title title1 = new System.Windows.Forms.DataVisualization.Charting.Title();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.label10 = new System.Windows.Forms.Label();
@@ -406,23 +406,23 @@
             // 
             // chartManaCurve
             // 
-            chartArea2.Name = "ChartArea1";
-            this.chartManaCurve.ChartAreas.Add(chartArea2);
+            chartArea1.Name = "ChartArea1";
+            this.chartManaCurve.ChartAreas.Add(chartArea1);
             this.chartManaCurve.Dock = System.Windows.Forms.DockStyle.Fill;
-            legend2.Name = "Legend1";
-            this.chartManaCurve.Legends.Add(legend2);
+            legend1.Name = "Legend1";
+            this.chartManaCurve.Legends.Add(legend1);
             this.chartManaCurve.Location = new System.Drawing.Point(3, 3);
             this.chartManaCurve.Name = "chartManaCurve";
-            series2.ChartArea = "ChartArea1";
-            series2.Legend = "Legend1";
-            series2.Name = "Mana";
-            this.chartManaCurve.Series.Add(series2);
+            series1.ChartArea = "ChartArea1";
+            series1.Legend = "Legend1";
+            series1.Name = "Mana";
+            this.chartManaCurve.Series.Add(series1);
             this.chartManaCurve.Size = new System.Drawing.Size(1030, 366);
             this.chartManaCurve.TabIndex = 1;
             this.chartManaCurve.Text = "Mana Curve";
-            title2.Name = "titleManaCurve";
-            title2.Text = "Mana Curve";
-            this.chartManaCurve.Titles.Add(title2);
+            title1.Name = "titleManaCurve";
+            title1.Text = "Mana Curve";
+            this.chartManaCurve.Titles.Add(title1);
             // 
             // CurveControl
             // 
