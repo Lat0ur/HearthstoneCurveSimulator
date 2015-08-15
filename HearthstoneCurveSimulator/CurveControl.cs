@@ -5,13 +5,72 @@ using System.Windows.Forms;
 
 namespace HearthstoneCurveSimulator
 {
+    /// <summary>
+    /// CurveControl
+    /// </summary>
     public partial class CurveControl : UserControl
     {
+        /// <summary>
+        /// The backing store for the deck.
+        /// </summary>
         private List<int> _deck = new List<int>();
 
+        /// <summary>
+        /// Creates a new <see cref="CurveControl"/>
+        /// </summary>
         public CurveControl()
         {
             InitializeComponent();
+        }
+
+        public bool EventsDisabled { get; set; }
+
+        /// <summary>
+        /// LoadDeck
+        /// </summary>
+        /// <param name="deck"></param>
+        public void LoadDeck(int[] deck)
+        {
+            var tmpCurveData = DeckToCurve(deck);
+
+            lock (this)
+            {
+                EventsDisabled = true;
+
+                var index = 1;
+
+                numericUpDown1.Value = tmpCurveData[index++];
+                numericUpDown2.Value = tmpCurveData[index++];
+                numericUpDown3.Value = tmpCurveData[index++];
+                numericUpDown4.Value = tmpCurveData[index++];
+                numericUpDown5.Value = tmpCurveData[index++];
+                numericUpDown6.Value = tmpCurveData[index++];
+                numericUpDown7.Value = tmpCurveData[index++];
+                numericUpDown8.Value = tmpCurveData[index++];
+                numericUpDown9.Value = tmpCurveData[index++];
+                numericUpDown10.Value = tmpCurveData[index];
+
+                EventsDisabled = false;
+
+                numericUpDown_ValueChanged(this, EventArgs.Empty);
+            }
+        }
+
+        /// <summary>
+        /// DeckToCurve will convert a deck format into a distribution format
+        /// </summary>
+        /// <param name="deck">the deck to convert</param>
+        /// <returns></returns>
+        private static Dictionary<int, int> DeckToCurve(int[] deck)
+        {
+            var tmpReturn = new Dictionary<int, int>();
+
+            for (var i = 1; i <= 10; i++)
+            {
+                tmpReturn.Add(i, deck.Count(s => s == i));
+            }
+
+            return tmpReturn;
         }
 
         /// <summary>
@@ -20,7 +79,15 @@ namespace HearthstoneCurveSimulator
         public List<int> Deck
         {
             get { return _deck; }
-            set { _deck = value; }
+            set
+            {
+                _deck = value;
+
+                OnDeckChanged(new DeckChangedEvent
+                    {
+                        Deck = value
+                    });
+            }
         }
 
         /// <summary>
@@ -30,6 +97,11 @@ namespace HearthstoneCurveSimulator
         /// <param name="e">event args</param>
         private void numericUpDown_ValueChanged(object sender, EventArgs e)
         {
+            if (EventsDisabled)
+            {
+                return;
+            }
+
             var tmpDeck = new List<int>();
 
             tmpDeck.AddRange(GetCards(1, numericUpDown1));
@@ -44,7 +116,7 @@ namespace HearthstoneCurveSimulator
             tmpDeck.AddRange(GetCards(10, numericUpDown10));
 
             var tmpCurveData = tmpDeck.GroupBy(s => s).ToDictionary(s => s.Key, s => tmpDeck.Count(v => v == s.Key));
-        
+
             chartManaCurve.Series["Mana"].Points.Clear();
 
             for (var i = 0; i <= 10; i++)
@@ -53,20 +125,28 @@ namespace HearthstoneCurveSimulator
                     tmpCurveData.ContainsKey(i) ? tmpCurveData[i] : 0);
             }
 
-            OnDeckChanged(new DeckChangedEvent
-                {
-                    Deck = (Deck = tmpDeck),
-                });
+
+            Deck = tmpDeck;
         }
 
+        /// <summary>
+        /// DeckChanged
+        /// </summary>
         public event EventHandler<DeckChangedEvent> DeckChanged;
 
+        /// <summary>
+        /// OnDeckChanged
+        /// </summary>
+        /// <param name="e">event args</param>
         protected virtual void OnDeckChanged(DeckChangedEvent e)
         {
-            EventHandler<DeckChangedEvent> handler = DeckChanged;
+            var handler = DeckChanged;
             if (handler != null) handler(this, e);
         }
 
+        /// <summary>
+        /// DeckChangedEvent
+        /// </summary>
         public class DeckChangedEvent : EventArgs
         {
             public List<int> Deck { get; set; }
